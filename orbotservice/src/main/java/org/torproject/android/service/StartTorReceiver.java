@@ -35,7 +35,10 @@ public class StartTorReceiver extends BroadcastReceiver implements TorServiceCon
                 Intent startsDisabledIntent = new Intent(ACTION_STATUS);
                 startsDisabledIntent.putExtra(EXTRA_STATUS, STATUS_STARTS_DISABLED);
                 startsDisabledIntent.setPackage(packageName);
-                context.sendBroadcast(startsDisabledIntent);
+                /* ********OpenRefactory Warning********
+				 Broadcasting message should specify receiver permission.
+				*/
+				context.sendBroadcast(startsDisabledIntent);
             }
         }
     }
