@@ -139,8 +139,19 @@ public class TorControlConnection implements TorControlCommands {
                 throw new TorControlSyntaxError("Connection to Tor " +
                      " broke down while receiving reply!");
             }
-            if (debugOutput != null)
-                debugOutput.println("<< "+line);
+            if (debugOutput != null) {
+				/* ********OpenRefactory Warning********
+				 Possible XSS attack!
+				Path: 
+					File: TorControlConnection.java, Line: 130
+						String line=input.readLine();
+						Variable line is initialized with a tainted value from external source
+					File: TorControlConnection.java, Line: 143
+						debugOutput.println("<< " + line);
+						Tainted information used in a sink.
+				*/
+				debugOutput.println("<< "+line);
+			}
             if (line.length() < 4)
                 throw new TorControlSyntaxError("Line (\""+line+"\") too short");
             String status = line.substring(0,3);
