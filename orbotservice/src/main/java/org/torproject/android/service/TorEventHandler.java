@@ -160,7 +160,7 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
 
                 sb.append(node.name);
 
-                if (!TextUtils.isEmpty(node.ipAddress))
+                if (!TextUtils.isEmpty(node.getIpAddress()))
                     sb.append("(").append(node.ipAddress).append(")");
 
                 if (st.hasMoreTokens())
@@ -171,7 +171,7 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
                     if (isFirstNode) {
                         hmBuiltNodes.put(node.id, node);
 
-                        if (node.ipAddress == null && (!node.isFetchingInfo) && Prefs.useDebugLogging()) {
+                        if (node.getIpAddress() == null && (!node.isFetchingInfo) && Prefs.useDebugLogging()) {
                             node.isFetchingInfo = true;
                             mService.exec(new ExternalIPFetcher(mService, node, OrbotService.mPortHTTP));
                         }
@@ -209,10 +209,18 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
         public String status;
         public String id;
         public String name;
-        public String ipAddress;
+        private String ipAddress;
         public String country;
         public String organization;
 
         public boolean isFetchingInfo = false;
+
+		public String getIpAddress() {
+			return ipAddress;
+		}
+
+		public void setIpAddress(String ipAddress) {
+			this.ipAddress = ipAddress;
+		}
     }
 }

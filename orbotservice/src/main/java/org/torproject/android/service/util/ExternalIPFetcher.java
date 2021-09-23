@@ -55,7 +55,7 @@ public class ExternalIPFetcher implements Runnable {
             JSONArray jsonRelays = jsonNodeInfo.getJSONArray("relays");
 
             if (jsonRelays.length() > 0) {
-                mNode.ipAddress = jsonRelays.getJSONObject(0).getJSONArray("or_addresses").getString(0).split(":")[0];
+                mNode.setIpAddress(jsonRelays.getJSONObject(0).getJSONArray("or_addresses").getString(0).split(":")[0]);
                 mNode.country = jsonRelays.getJSONObject(0).getString("country_name");
                 mNode.organization = jsonRelays.getJSONObject(0).getString("as_name");
 
