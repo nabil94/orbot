@@ -1629,7 +1629,17 @@ public class OrbotService extends VpnService implements TorServiceConstants, Orb
 
     public static boolean isChargingAndWifi(Context context) {
         Intent intent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: OrbotService.java, Line: 1631
+				Intent intent=context.registerReceiver(null,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+				Variable intent is assigned from a library method call which may return null.
+			File: OrbotService.java, Line: 1632
+				int plugged=intent.getIntExtra(BatteryManager.EXTRA_PLUGGED,-1);
+				intent is referenced in method invocation.
+		*/
+		int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         boolean isCharging = plugged == BatteryManager.BATTERY_PLUGGED_AC || plugged == BatteryManager.BATTERY_PLUGGED_USB || plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS;
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
