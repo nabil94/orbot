@@ -177,7 +177,7 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
 
                 if (node == null) {
                     node = new Node();
-                    node.id = nodeId;
+                    node.setId(nodeId);
                     node.name = nodeName;
                 }
 
@@ -194,7 +194,7 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
                 if (status.equals("EXTENDED")) {
 
                     if (isFirstNode) {
-                        hmBuiltNodes.put(node.id, node);
+                        hmBuiltNodes.put(node.getId(), node);
 
                         if (node.ipAddress == null && (!node.isFetchingInfo) && Prefs.useDebugLogging()) {
                             node.isFetchingInfo = true;
@@ -210,7 +210,7 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
                         mService.debug(sb.toString());
                 } else if (status.equals("CLOSED")) {
                     //  mService.logNotice(sb.toString());
-                    hmBuiltNodes.remove(node.id);
+                    hmBuiltNodes.remove(node.getId());
                 }
 
             }
@@ -232,12 +232,20 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
 
     public static class Node {
         public String status;
-        public String id;
+        private String id;
         public String name;
         public String ipAddress;
         public String country;
         public String organization;
 
         public boolean isFetchingInfo = false;
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
     }
 }
