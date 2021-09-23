@@ -36,7 +36,17 @@ public class ClientCookiesAdapter extends CursorAdapter {
         domain.setText(cursor.getString(cursor.getColumnIndex(CookieContentProvider.ClientCookie.DOMAIN)));
 
         Switch enabled = (Switch) view.findViewById(R.id.cookie_switch);
-        enabled.setChecked(
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: ClientCookiesAdapter.java, Line: 38
+				Switch enabled=(Switch)view.findViewById(R.id.cookie_switch);
+				Variable enabled is assigned from a library method call which may return null.
+			File: ClientCookiesAdapter.java, Line: 39
+				enabled.setChecked(cursor.getInt(cursor.getColumnIndex(CookieContentProvider.ClientCookie.ENABLED)) == 1);
+				enabled is referenced in method invocation.
+		*/
+		enabled.setChecked(
                 cursor.getInt(cursor.getColumnIndex(CookieContentProvider.ClientCookie.ENABLED)) == 1
         );
 
