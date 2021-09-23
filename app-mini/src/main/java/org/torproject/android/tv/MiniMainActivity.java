@@ -422,7 +422,17 @@ public class MiniMainActivity extends AppCompatActivity implements OrbotConstant
         }
 
         TextView versionName = (TextView) view.findViewById(R.id.versionName);
-        versionName.setText(version);
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: MiniMainActivity.java, Line: 424
+				TextView versionName=(TextView)view.findViewById(R.id.versionName);
+				Variable versionName is assigned from a library method call which may return null.
+			File: MiniMainActivity.java, Line: 425
+				versionName.setText(version);
+				versionName is referenced in method invocation.
+		*/
+		versionName.setText(version);
 
         TextView aboutOther = (TextView) view.findViewById(R.id.aboutother);
 
