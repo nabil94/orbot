@@ -211,8 +211,16 @@ public class TorEventHandler implements EventHandler, TorServiceConstants {
         public String name;
         public String ipAddress;
         public String country;
-        public String organization;
+        private String organization;
 
         public boolean isFetchingInfo = false;
+
+		public String getOrganization() {
+			return organization;
+		}
+
+		public void setOrganization(String organization) {
+			this.organization = organization;
+		}
     }
 }

@@ -57,7 +57,7 @@ public class ExternalIPFetcher implements Runnable {
             if (jsonRelays.length() > 0) {
                 mNode.ipAddress = jsonRelays.getJSONObject(0).getJSONArray("or_addresses").getString(0).split(":")[0];
                 mNode.country = jsonRelays.getJSONObject(0).getString("country_name");
-                mNode.organization = jsonRelays.getJSONObject(0).getString("as_name");
+                mNode.setOrganization(jsonRelays.getJSONObject(0).getString("as_name"));
 
                 StringBuffer sbInfo = new StringBuffer();
                 sbInfo.append(mNode.name).append("(");
@@ -66,7 +66,7 @@ public class ExternalIPFetcher implements Runnable {
                 if (mNode.country != null)
                     sbInfo.append(' ').append(mNode.country);
 
-                if (mNode.organization != null)
+                if (mNode.getOrganization() != null)
                     sbInfo.append(" (").append(mNode.organization).append(')');
 
                 mService.debug(sbInfo.toString());
