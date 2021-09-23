@@ -162,7 +162,7 @@ public class OtherResourceInstaller implements TorServiceConstants {
                 out.write(data);
             }
 
-            if (b == -1); //rejoice
+            if (b == -1)
 
             //
             out.flush();
