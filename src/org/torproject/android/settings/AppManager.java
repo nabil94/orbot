@@ -112,7 +112,22 @@ public class AppManager extends Activity implements OnCheckedChangeListener, OnC
                     if (!box.isChecked())
                         box.performClick();
                 }else if (this.status == 1){
-                    if (box.isChecked())
+                    
+					/* ********OpenRefactory Warning********
+					 Possible null pointer Dereference!
+					 Path: 
+						File: AppManager.java, Line: 74
+							CheckBox box;
+							Variable box is declared without initialization.
+						File: AppManager.java, Line: 110
+							box=(CheckBox)currentView.findViewById(R.id.itemcheck);
+							 box is assigned from a library method call which may return null.
+						File: AppManager.java, Line: 115
+							box.isChecked()
+							box is referenced in method invocation.
+							The expression is enclosed inside an If statement.
+					*/
+					if (box.isChecked())
                         box.performClick();
                 }else {
                     box.performClick();
