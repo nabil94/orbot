@@ -39,7 +39,14 @@ public class HSDataDialog extends DialogFragment {
                 Integer localPort = Integer.parseInt(
                         ((EditText) dialog_view.findViewById(R.id.hsLocalPort)).getText().toString()
                 );
-                Integer onionPort = Integer.parseInt(
+                /* ********OpenRefactory Warning********
+				 Possible null pointer Dereference!
+				 Path: 
+					File: HSDataDialog.java, Line: 43
+						Integer onionPort=Integer.parseInt(((EditText)dialog_view.findViewById(R.id.hsOnionPort)).getText().toString());
+						Method findViewById may return null and is referenced in method invocation.
+				*/
+				Integer onionPort = Integer.parseInt(
                         ((EditText) dialog_view.findViewById(R.id.hsOnionPort)).getText().toString()
                 );
 
