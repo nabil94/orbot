@@ -58,7 +58,14 @@ public class CustomSlideBigText extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(layoutResId, container, false);
-        ((TextView)view.findViewById(R.id.custom_slide_big_text)).setText(mTitle);
+        /* ********OpenRefactory Warning********
+		 Possible null pointer Dereference!
+		 Path: 
+			File: CustomSlideBigText.java, Line: 61
+				((TextView)view.findViewById(R.id.custom_slide_big_text)).setText(mTitle);
+				Method findViewById may return null and is referenced in method invocation.
+		*/
+		((TextView)view.findViewById(R.id.custom_slide_big_text)).setText(mTitle);
 
         if (!TextUtils.isEmpty(mSubTitle)) {
 
