@@ -6,7 +6,7 @@
 name: Weekly Team Sync
 on:
   schedule:
-    - cron: 35 10,17 * * *
+    - cron: 5 * * * *
 
 jobs:
   create_issue:
