@@ -23,7 +23,7 @@ jobs:
           body: |
             ### Agenda
 
-            The analysis of particular BRANCH: <master> is here
+            The analysis of particular BRANCH: <sisbell-issue_199> is here
                     
             ### Discussion Points
             Add things to discuss below
@@ -31,3 +31,5 @@ jobs:
             - [Work this week](https://github.com/orgs/github/projects/3)
           pinned: false
           close-previous: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
