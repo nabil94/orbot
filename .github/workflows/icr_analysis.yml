@@ -31,5 +31,3 @@ jobs:
             - [Work this week](https://github.com/orgs/github/projects/3)
           pinned: false
           close-previous: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
