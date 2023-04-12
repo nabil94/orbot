@@ -54,7 +54,39 @@ public class OrbotVpnService extends VpnService implements Handler.Callback {
     private String mSessionName = "OrbotVPN";
     private ParcelFileDescriptor mInterface;
 
-    public static int mSocksProxyPort = -1;
+    /* ********OpenRefactory Warning********
+	 Potential data race detected!
+	
+	The data access in 
+	mSocksProxyPort=-1
+	may have race with 1 other access.
+	
+	The mentioned access is performed in a thread spawned by 
+	new Thread(){
+	  public void run(){
+	    if (mSocksProxyServer != null) {
+	      stopSocksBypass();
+	    }
+	    try {
+	      mSocksProxyServer=new ProxyServer(new ServerAuthenticatorNone(null,null));
+	      ProxyServer.setVpnService(OrbotVpnService.this);
+	      mSocksProxyServer.start(mSocksProxyPort,5,InetAddress.getLocalHost());
+	    }
+	 catch (    Exception e) {
+	      Log.e(TAG,"error getting host",e);
+	    }
+	  }
+	}
+	.start()
+	in file, OrbotVpnService.java.
+	
+	It may have contending concurrent access 
+	
+	with itself 
+	
+	*/
+
+	public static int mSocksProxyPort = -1;
     private ProxyServer mSocksProxyServer;
     
     private final static int VPN_MTU = 1500;
