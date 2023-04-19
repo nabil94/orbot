@@ -169,6 +169,25 @@ public class OrbotDiagnosticsActivity extends Activity {
 		{
 			String line = null;			
 			try {
+				
+				/* ********OpenRefactory Warning********
+				 Potential data race detected!
+				
+				The data access in 
+				reader.readLine()
+				may have race with 1 other access.
+				
+				The mentioned access is performed in a thread spawned by 
+				new Thread(sg).start()
+				in file, OrbotDiagnosticsActivity.java.
+				
+				It may have contending concurrent access 
+				
+				in file, OrbotDiagnosticsActivity.java, class OrbotDiagnosticsActivity, method runTorTest, 
+				
+				sg.reader=bufferedReader
+				
+				*/
 				while ( (line = reader.readLine()) != null)
 				{
 					Message msg = mHandler.obtainMessage(0);
