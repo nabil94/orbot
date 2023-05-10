@@ -179,7 +179,56 @@ public class OrbotVpnManager implements Handler.Callback {
                     try {
 
                         sSocksProxyLocalhost = "127.0.0.1";// InetAddress.getLocalHost().getHostAddress();
-                        sSocksProxyServerPort = (int) ((Math.random() * 1000) + 10000);
+                        /* ********OpenRefactory Warning********
+						 Potential data race detected!
+						
+						The data access in 
+						sSocksProxyServerPort=(int)((Math.random() * 1000) + 10000)
+						may have race with 3 other accesses.
+						
+						The mentioned access is performed in a thread spawned by 
+						new Thread(){
+						  public void run(){
+						    if (sSocksProxyServerPort == -1) {
+						      try {
+						        sSocksProxyLocalhost="127.0.0.1";
+						        sSocksProxyServerPort=(int)((Math.random() * 1000) + 10000);
+						      }
+						 catch (      Exception e) {
+						        Log.e(TAG,"Unable to access localhost",e);
+						        throw new RuntimeException("Unable to access localhost: " + e);
+						      }
+						    }
+						    if (mSocksProxyServer != null) {
+						      stopSocksBypass();
+						    }
+						    try {
+						      mSocksProxyServer=new ProxyServer(new ServerAuthenticatorNone(null,null));
+						      ProxyServer.setVpnService(mService);
+						      mSocksProxyServer.start(sSocksProxyServerPort,5,InetAddress.getLocalHost());
+						    }
+						 catch (    Exception e) {
+						      Log.e(TAG,"error getting host",e);
+						    }
+						  }
+						}
+						.start()
+						in file, OrbotVpnManager.java.
+						
+						It may have contending concurrent access 
+						
+						1. in file, OrbotVpnManager.java, class OrbotVpnManager, method OrbotVpnManager, 
+						
+						sSocksProxyServerPort=-1
+						
+						2. with itself 
+						
+						3. in file, OrbotVpnManager.java, class ANON__OR__TYPE$Thread, method run, 
+						
+						mSocksProxyServer.start(sSocksProxyServerPort,5,InetAddress.getLocalHost())
+						
+						*/
+						sSocksProxyServerPort = (int) ((Math.random() * 1000) + 10000);
 
                     } catch (Exception e) {
                         Log.e(TAG, "Unable to access localhost", e);
